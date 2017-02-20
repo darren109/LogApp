@@ -39,7 +39,7 @@ public class XmlLog {
         Util.printLine(tag, false);
     }
 
-    public static String formatXML(String inputXML) {
+    private static String formatXML(String inputXML) {
         try {
             Source xmlInput = new StreamSource(new StringReader(inputXML));
             StreamResult xmlOutput = new StreamResult(new StringWriter());

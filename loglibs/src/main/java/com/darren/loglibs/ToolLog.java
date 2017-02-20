@@ -28,7 +28,7 @@ public class ToolLog {
     private static final String DEFAULT_MESSAGE = "execute";
     private static final String PARAM = "Param";
     private static final String NULL = "null";
-    private static final String TAG_DEFAULT = "KLog";
+    private static final String TAG_DEFAULT = "ToolLog";
     private static final String SUFFIX = ".java";
 
     public static final int JSON_INDENT = 4;
