@@ -131,31 +131,31 @@ public class ToolLog {
         printLog(A, tag, objects);
     }
 
-    public static void json(String jsonFormat) {
+    public static void j(String jsonFormat) {
         printLog(JSON, null, jsonFormat);
     }
 
-    public static void json(String tag, String jsonFormat) {
+    public static void j(String tag, String jsonFormat) {
         printLog(JSON, tag, jsonFormat);
     }
 
-    public static void xml(String xml) {
+    public static void x(String xml) {
         printLog(XML, null, xml);
     }
 
-    public static void xml(String tag, String xml) {
+    public static void x(String tag, String xml) {
         printLog(XML, tag, xml);
     }
 
-    public static void file(File targetDirectory, Object msg) {
+    public static void f(File targetDirectory, Object msg) {
         printFile(null, targetDirectory, null, msg);
     }
 
-    public static void file(String tag, File targetDirectory, Object msg) {
+    public static void f(String tag, File targetDirectory, Object msg) {
         printFile(tag, targetDirectory, null, msg);
     }
 
-    public static void file(String tag, File targetDirectory, String fileName, Object msg) {
+    public static void f(String tag, File targetDirectory, String fileName, Object msg) {
         printFile(tag, targetDirectory, fileName, msg);
     }
 
@@ -190,11 +190,9 @@ public class ToolLog {
 
 
     private static void printFile(String tagStr, File targetDirectory, String fileName, Object objectMsg) {
-
         if (!IS_SHOW_LOG) {
             return;
         }
-
         String[] contents = wrapperContent(tagStr, objectMsg);
         String tag = contents[0];
         String msg = contents[1];

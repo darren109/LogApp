@@ -16,7 +16,7 @@ import java.util.Random;
  */
 public class FileLog {
 
-    private static final String FILE_PREFIX = "KLog_";
+    private static final String FILE_PREFIX = "ToolLog_";
     private static final String FILE_FORMAT = ".log";
 
     public static void printFile(String tag, File targetDirectory, String fileName, String headString, String msg) {

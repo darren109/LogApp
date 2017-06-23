@@ -1,1 +1,1 @@
-include ':app', ':loglibrary', ':loglibs'
+include ':app', ':loglibs'

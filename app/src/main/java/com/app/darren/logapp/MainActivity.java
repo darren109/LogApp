@@ -1,11 +1,12 @@
-package com.app.darren;
+package com.app.darren.logapp;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.app.darren.R;
 import com.darren.loglibs.ToolLog;
-import com.darren.loglibs.utils.FileLogUtils;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
@@ -101,12 +102,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logWithFile(View view) {
-//        ToolLog.file(Environment.getExternalStoragePublicDirectory("LogApp"), JSON_LONG);
-//        ToolLog.file(TAG, Environment.getExternalStoragePublicDirectory("LogApp"), JSON_LONG);
-//        ToolLog.file(TAG, Environment.getExternalStoragePublicDirectory("LogApp"), "test.txt", JSON_LONG);
-        ToolLog.file(TAG, FileLogUtils.getExternalStoragePathDir(), JSON_LONG);
-        ToolLog.file(TAG, FileLogUtils.getExternalStoragePathDir(), JSON_LONG);
-        ToolLog.file(TAG, FileLogUtils.getExternalStoragePathDir(), "test.txt", JSON_LONG);
+        ToolLog.file(Environment.getExternalStoragePublicDirectory("LogApp"), JSON_LONG);
+        ToolLog.file(TAG, Environment.getExternalStoragePublicDirectory("LogApp"), JSON_LONG);
+        ToolLog.file(TAG, Environment.getExternalStoragePublicDirectory("LogApp"), "test.txt", JSON_LONG);
     }
 
     public void logWithXml(View view) {
@@ -136,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     ///////////////////////////////////////////////////////////////////////////
     // MENU
     ///////////////////////////////////////////////////////////////////////////
-    
+
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        getMenuInflater().inflate(R.menu.menu_about, menu);
