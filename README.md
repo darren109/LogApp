@@ -17,36 +17,36 @@ Android LogCat 工具类，目前功能：
 
 ---
 
-##Features
+## Features
 
 - Can use ToolLog.d() with no tag
 - Print log info with line number and method name
 - Jump to the position where the log is invoked, by click in the Android Studio Logcat
 
-##Update
+## Update
 
 - Add support for Long JSON String
 - ToolLog.file() could save the log to file
 - Add support for xml format string
 - Add support for long string
 
-###ToolLog.d()
-###ToolLog.d(String)
-###ToolLog.d(Tag,String)
-###ToolLog.json(String)
-###ToolLog.j(Tag,String)
-###ToolLog.f()
+### ToolLog.d()
+### ToolLog.d(String)
+### ToolLog.d(Tag,String)
+### ToolLog.json(String)
+### ToolLog.j(Tag,String)
+### ToolLog.f()
 ```
  ToolLog.f(TAG, Environment.getExternalStorageDirectory(), "test.txt", JSON_LONG);
 ```
-###ToolLog.x()
+### ToolLog.x()
 ```
  ToolLog.x(XML);
 ```
-##Eclipse
+## Eclipse
 
 You need add Toollog.jar into your project.
 
-##Notice
+## Notice
 
 If you don't need the method -- ToolLog.x() ，you can delete the method about it ,so that you can decrease the almost size of this library.
