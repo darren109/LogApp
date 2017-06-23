@@ -3,7 +3,7 @@ package com.darren.loglibs.log;
 import android.util.Log;
 
 import com.darren.loglibs.ToolLog;
-import com.darren.loglibs.Util;
+import com.darren.loglibs.utils.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;

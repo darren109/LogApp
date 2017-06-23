@@ -25,11 +25,12 @@ Android LogCat 工具类，目前功能：
 
 ## Update
 
-- Add support for Long JSON String
-- ToolLog.file() could save the log to file
-- Add support for xml format string
-- Add support for long string
-
+- Add ToolLog.log() could save the log to log 
+- Add ToolLog.getLocalLogFile() could get the local log
+- Add ToolLog.getLocalLogBackupFile() could get the local log backups
+- Add support check is has permissions[android.permission.WRITE_EXTERNAL_STORAGE]
+- Add the thread pool handle file reading and writing
+- Add Throwable object log processing
 ### ToolLog.d()
 ### ToolLog.d(String)
 ### ToolLog.d(Tag,String)
@@ -43,6 +44,8 @@ Android LogCat 工具类，目前功能：
 ```
  ToolLog.x(XML);
 ```
+### ToolLog.log()
+
 ## Eclipse
 
 You need add Toollog.jar into your project.

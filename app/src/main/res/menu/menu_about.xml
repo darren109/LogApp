@@ -7,10 +7,4 @@
         android:orderInCategory="100"
         android:title="GITHUB"
         app:showAsAction="always" />
-
-    <item
-        android:id="@+id/action_csdn"
-        android:orderInCategory="100"
-        android:title="CSDN"
-        app:showAsAction="always" />
 </menu>

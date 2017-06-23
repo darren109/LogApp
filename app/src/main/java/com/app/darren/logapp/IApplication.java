@@ -6,13 +6,14 @@ import com.darren.loglibs.ToolLog;
 
 
 /**
- * Created by zhaokaiqiang on 15/11/14.
+ * Created by darren on 15/11/14.
  */
 public class IApplication extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ToolLog.init(true,"IApplication:app");
+//        ToolLog.init(this, "IApplication:app");
+        ToolLog.init(this, true, true, "IApplication:app");
     }
 }

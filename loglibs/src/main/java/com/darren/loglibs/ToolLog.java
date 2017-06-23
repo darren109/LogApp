@@ -1,22 +1,22 @@
 package com.darren.loglibs;
 
 
+import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.darren.loglibs.log.BaseLog;
 import com.darren.loglibs.log.FileLog;
 import com.darren.loglibs.log.JsonLog;
 import com.darren.loglibs.log.XmlLog;
+import com.darren.loglibs.utils.Util;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * This is a Log tool，with this you can the following
- * <ol>
- * <li>use KLog.d(),you could print whether the method execute,and the default tag is current class's name</li>
- * <li>use KLog.d(msg),you could print log as before,and you could location the method with a click in Android Studio Logcat</li>
- * <li>use KLog.json(),you could print json string with well format automatic</li>
- * </ol>
  *
  * @author Darren
  */
@@ -24,6 +24,7 @@ public class ToolLog {
 
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     public static final String NULL_TIPS = "Log with null object";
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss aaa");
 
     private static final String DEFAULT_MESSAGE = "execute";
     private static final String PARAM = "Param";
@@ -32,31 +33,37 @@ public class ToolLog {
     private static final String SUFFIX = ".java";
 
     public static final int JSON_INDENT = 4;
-    public static final int V = 0x1;
-
-    public static final int D = 0x2;
-    public static final int I = 0x3;
-    public static final int W = 0x4;
-    public static final int E = 0x5;
-    public static final int A = 0x6;
-
-    private static final int JSON = 0x7;
-    private static final int XML = 0x8;
+    public static final int V = 0x01;
+    public static final int D = 0x02;
+    public static final int I = 0x03;
+    public static final int W = 0x04;
+    public static final int E = 0x05;
+    private static final int JSON = 0x07;
+    private static final int XMl = 0x08;
 
     private static final int STACK_TRACE_INDEX = 5;
 
     private static String mGlobalTag;
     private static boolean mIsGlobalTagEmpty = true;
-    private static boolean IS_SHOW_LOG = true;
 
-    public static void init(boolean isShowLog) {
-        IS_SHOW_LOG = isShowLog;
+    private static boolean IS_SHOW_LOG = true;
+    private static boolean IS_SAVE_LOG = true;
+    private static Context context;
+
+    public static void init(Context context, String tag) {
+        init(context, true, true, tag);
     }
 
-    public static void init(boolean isShowLog, String tag) {
+    public static void init(Context context, boolean isShowLog, boolean isSaveLog, String tag) {
+        ToolLog.context = context;
         IS_SHOW_LOG = isShowLog;
+        IS_SAVE_LOG = isSaveLog;
         mGlobalTag = tag;
         mIsGlobalTagEmpty = TextUtils.isEmpty(mGlobalTag);
+    }
+
+    public static Context getContext() {
+        return context;
     }
 
     public static void v() {
@@ -119,44 +126,40 @@ public class ToolLog {
         printLog(E, tag, objects);
     }
 
-    public static void a() {
-        printLog(A, null, DEFAULT_MESSAGE);
-    }
-
-    public static void a(Object msg) {
-        printLog(A, null, msg);
-    }
-
-    public static void a(String tag, Object... objects) {
-        printLog(A, tag, objects);
-    }
-
-    public static void j(String jsonFormat) {
+    public static void json(String jsonFormat) {
         printLog(JSON, null, jsonFormat);
     }
 
-    public static void j(String tag, String jsonFormat) {
+    public static void json(String tag, String jsonFormat) {
         printLog(JSON, tag, jsonFormat);
     }
 
-    public static void x(String xml) {
-        printLog(XML, null, xml);
+    public static void xml(String xml) {
+        printLog(XMl, null, xml);
     }
 
-    public static void x(String tag, String xml) {
-        printLog(XML, tag, xml);
+    public static void xml(String tag, String xml) {
+        printLog(XMl, tag, xml);
     }
 
-    public static void f(File targetDirectory, Object msg) {
+    public static void file(File targetDirectory, Object msg) {
         printFile(null, targetDirectory, null, msg);
     }
 
-    public static void f(String tag, File targetDirectory, Object msg) {
+    public static void file(String tag, File targetDirectory, Object msg) {
         printFile(tag, targetDirectory, null, msg);
     }
 
-    public static void f(String tag, File targetDirectory, String fileName, Object msg) {
+    public static void file(String tag, File targetDirectory, String fileName, Object msg) {
         printFile(tag, targetDirectory, fileName, msg);
+    }
+
+    public static void log(Object object) {
+        printFileLog(null, object);
+    }
+
+    public static void log(String tag, Object... objects) {
+        printFileLog(tag, objects);
     }
 
     private static void printLog(int type, String tagStr, Object... objects) {
@@ -176,21 +179,29 @@ public class ToolLog {
             case I:
             case W:
             case E:
-            case A:
                 BaseLog.printDefault(type, tag, headString + msg);
                 break;
             case JSON:
                 JsonLog.printJson(tag, msg, headString);
                 break;
-            case XML:
+            case XMl:
                 XmlLog.printXml(tag, msg, headString);
                 break;
         }
     }
 
 
+    /**
+     * @param tagStr
+     * @param targetDirectory
+     * @param fileName
+     * @param objectMsg
+     */
     private static void printFile(String tagStr, File targetDirectory, String fileName, Object objectMsg) {
-        if (!IS_SHOW_LOG) {
+        if (!IS_SAVE_LOG) {
+            return;
+        } else if (context == null) {
+            e(tagStr, "Tool Log init () method is not called,Or context is null");
             return;
         }
         String[] contents = wrapperContent(tagStr, objectMsg);
@@ -201,6 +212,48 @@ public class ToolLog {
         FileLog.printFile(tag, targetDirectory, fileName, headString, msg);
     }
 
+    private static void printFileLog(String tagStr, Object... objects) {
+        if (!IS_SAVE_LOG) {
+            return;
+        } else if (context == null) {
+            e(tagStr, "Tool Log init () method is not called,Or context is null");
+            return;
+        }
+        String[] contents = wrapperContent(tagStr, objects);
+        String tag = contents[0];
+        String msg = contents[1];
+        String headString = contents[2];
+
+        FileLog.printFileLog(tag, headString, msg);
+    }
+
+    /**
+     * 获取本地日志
+     *
+     * @return
+     * @hide
+     */
+    public static File getLocalLogFile() {
+        return new File(Util.getProperCacheDir(context, "Log"), File.separator + "local.log");
+    }
+
+    /**
+     * 获取本地日志备份
+     *
+     * @return
+     * @hide
+     */
+    public static File getLocalLogBackupFile() {
+        return new File(Util.getProperCacheDir(context, "Log"), File.separator + "local_backup.log");
+    }
+
+    /**
+     * 生成Log日志。前缀信息格式：日期时间+当前线程名+文件名+行号+方法名
+     *
+     * @param tagStr
+     * @param objects
+     * @return
+     */
     private static String[] wrapperContent(String tagStr, Object... objects) {
 
         StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
@@ -234,7 +287,8 @@ public class ToolLog {
         }
 
         String msg = (objects == null) ? NULL_TIPS : getObjectsString(objects);
-        String headString = "[ (" + className + ":" + lineNumber + ")#" + methodNameShort + " ] ";
+        String headString = "[ " + SIMPLE_DATE_FORMAT.format(new Date()) + " " + Thread.currentThread().getName() + " ]" +
+                "[(" + className + ":" + lineNumber + ")#" + methodNameShort + " ] ";
 
         return new String[]{tag, msg, headString};
     }
@@ -249,14 +303,17 @@ public class ToolLog {
                 if (object == null) {
                     stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ").append(NULL).append("\n");
                 } else {
-                    stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ").append(object.toString()).append("\n");
+                    stringBuilder.append(PARAM).append("[").append(i).append("]").append(" = ")
+                            .append(object instanceof Throwable ? Log.getStackTraceString((Throwable) object) : object.toString())
+                            .append("\n");
                 }
             }
             return stringBuilder.toString();
         } else {
             Object object = objects[0];
-            return object == null ? NULL : object.toString();
+            return object == null ? NULL : object instanceof Throwable ? Log.getStackTraceString((Throwable) object) : object.toString();
         }
     }
+
 
 }

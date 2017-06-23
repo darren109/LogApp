@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".logapp.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,78 +15,96 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="log"
-            android:text="Log.d()"/>
+            android:text="ToolLog.d()" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithNull"
-            android:text="Log.d(NULL)"/>
+            android:text="ToolLog.d(NULL)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithMsg"
-            android:text="Log.d(Object)"/>
+            android:text="ToolLog.d(Object)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithLong"
-            android:text="Log.d(Long String)"/>
+            android:text="ToolLog.d(Long String)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithTag"
-            android:text="Log.d(TAG,Object)"/>
+            android:text="ToolLog.d(TAG,Object)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithParams"
-            android:text="Log.d(TAG,Object,Params)"/>
+            android:text="ToolLog.d(TAG,Object,Params)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithJson"
-            android:text="Log.json(JSON)"/>
+            android:text="ToolLog.json(JSON)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithLongJson"
-            android:text="Log.json(LONG JSON)"/>
+            android:text="ToolLog.json(LONG JSON)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithJsonTag"
-            android:text="Log.json(TAG,JSON)"/>
+            android:text="ToolLog.json(TAG,JSON)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithFile"
-            android:text="Log.file(File)"/>
+            android:text="ToolLog.file(File)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithXml"
-            android:text="Log.xml(XML)"/>
+            android:text="ToolLog.xml(XML)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="logWithXmlFromNet"
-            android:text="Log.xml(FROM NET)"/>
+            android:text="ToolLog.xml(FROM NET)" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onExceprionMethd"
-            android:text="onExceprion"/>
+            android:text="ToolLog.log()" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onGetLocalLogFileDir"
+            android:text="ToolLog.getLocalLogFile()" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onGetLocalLogBackupFileDir"
+            android:text="ToolLog.getLocalLogBackupFile()" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="sendLog"
+            android:text="send Log" />
     </LinearLayout>
 </ScrollView>

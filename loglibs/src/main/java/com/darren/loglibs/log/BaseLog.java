@@ -46,9 +46,6 @@ public class BaseLog {
             case ToolLog.E:
                 Log.e(tag, sub);
                 break;
-            case ToolLog.A:
-                Log.wtf(tag, sub);
-                break;
         }
     }
 

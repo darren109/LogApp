@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 9
         targetSdkVersion 25
-        versionCode 6
-        versionName "1.6"
+        versionCode 7
+        versionName "1.7"
     }
     buildTypes {
         release {
@@ -45,5 +45,5 @@ def makeJar(String target,String classDir){
 //新建一个task,名为buildLib,依赖build(build是一个自带的task) 
 //生成jar的命令.......项目名/模块名>gradle buildLib
 task buildLib(dependsOn:['build'])<< {
-    makeJar("ToolLog-v1.6.jar","build/intermediates/classes/release")
+    makeJar("ToolLog-v1.7.jar","build/intermediates/classes/release")
 }
