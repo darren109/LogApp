@@ -234,7 +234,7 @@ public class ToolLog {
      * @hide
      */
     public static File getLocalLogFile() {
-        return new File(Util.getProperCacheDir(context, "Log"), File.separator + "local.log");
+        return new File(Util.getProperCacheDir(context, FileLog.getFileLogPath()), File.separator + FileLog.getLocalFileName());
     }
 
     /**
@@ -244,7 +244,7 @@ public class ToolLog {
      * @hide
      */
     public static File getLocalLogBackupFile() {
-        return new File(Util.getProperCacheDir(context, "Log"), File.separator + "local_backup.log");
+        return new File(Util.getProperCacheDir(context, FileLog.getFileLogPath()), File.separator + FileLog.getLocalBackupFileName());
     }
 
     /**

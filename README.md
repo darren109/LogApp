@@ -31,6 +31,7 @@ Android LogCat 工具类，目前功能：
 - Add support check is has permissions[android.permission.WRITE_EXTERNAL_STORAGE]
 - Add the thread pool handle file reading and writing
 - Add Throwable object log processing
+
 ### ToolLog.d()
 ### ToolLog.d(String)
 ### ToolLog.d(Tag,String)

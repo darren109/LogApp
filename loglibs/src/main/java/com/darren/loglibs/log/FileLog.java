@@ -30,7 +30,22 @@ public class FileLog {
     private static final String TAG = FileLog.class.getSimpleName();
     private static final long FILE_MAX_LENGTH = 1024 * 1024;//1M 大小
     private static final String FILE_PREFIX = "ToolLog_";
+    private static final String FILE_LOCAL_LOG_PREFIX = "local";
+    private static final String FILE_LOCAL_BACKUP_LOG_PREFIX = "local_backup";
     private static final String FILE_FORMAT = ".log";
+    private static final String FILE_LOG_PATH = "Log";
+
+    public static String getLocalFileName() {
+        return FILE_LOCAL_LOG_PREFIX + FILE_FORMAT;
+    }
+
+    public static String getLocalBackupFileName() {
+        return FILE_LOCAL_BACKUP_LOG_PREFIX + FILE_FORMAT;
+    }
+
+    public static String getFileLogPath() {
+        return FILE_LOG_PATH;
+    }
 
     private static String getFileName() {
         Random random = new Random();
@@ -135,8 +150,8 @@ public class FileLog {
      */
     private static void save(String tag, String msg) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 || hasWritePermission(ToolLog.getContext())) {
-            File cacheFile = Util.getProperCacheDir(ToolLog.getContext(), "Log");
-            File localLog = new File(cacheFile.getAbsolutePath() + File.separator + "local.log");
+            File cacheFile = Util.getProperCacheDir(ToolLog.getContext(), getFileLogPath());
+            File localLog = new File(cacheFile.getAbsolutePath() + File.separator + getLocalFileName());
             if (!cacheFile.exists()) {
                 if (!cacheFile.mkdir()) return;
             }
@@ -159,7 +174,7 @@ public class FileLog {
                     bufferedWriter = null;
                 }
                 if (localLog.length() > FILE_MAX_LENGTH) {
-                    File localBackup = new File(cacheFile, "local_backup.log");
+                    File localBackup = new File(cacheFile, getLocalBackupFileName());
                     if (localBackup.exists() && localBackup.isFile()) {
                         localBackup.delete();
                     }

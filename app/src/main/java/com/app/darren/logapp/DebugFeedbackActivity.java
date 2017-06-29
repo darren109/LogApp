@@ -23,13 +23,11 @@ import java.util.Date;
  * Version 2.1.1
  * <p>
  * Date: 16/12/10 13:51
- * Author: zhendong.wu@shoufuyou.com
- * <p/>
- * Copyright © 2016 Shanghai Xiaotu Network Technology Co., Ltd.
+ * Author: darren1009@qq.com
  */
 
 public class DebugFeedbackActivity extends AppCompatActivity {
-    private static final String DEBUG_FEEDBACK_TIME_STAMP = "lastTime";
+    private static final String DEBUG_FEEDBACK_TIME_STAMP = "last_time";
     private SharedPreferences sp;
     private FloatingActionButton fabSend;
     private TextInputEditText textTitle, textContent;

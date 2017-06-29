@@ -158,11 +158,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onGetLocalLogFileDir(View view) {
-        Toast.makeText(this, ToolLog.getLocalLogFile().getPath(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ToolLog.getLocalLogFile().getPath() + ":exists=" + ToolLog.getLocalLogFile().exists(), Toast.LENGTH_SHORT).show();
     }
 
     public void onGetLocalLogBackupFileDir(View view) {
-        Toast.makeText(this, ToolLog.getLocalLogBackupFile().getPath(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ToolLog.getLocalLogBackupFile().getPath() + ":exists=" + ToolLog.getLocalLogBackupFile().exists(), Toast.LENGTH_SHORT).show();
     }
 
     public void sendLog(View view) {
@@ -187,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/3642072/LogApp")));
                 break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

@@ -16,15 +16,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    //生成Jar
-    lintOptions {
-        abortOnError false
-    }
-    sourceSets{
-        main{
-            jniLibs.srcDir('libs')
-        }
-    }
 }
 
 dependencies {
@@ -32,18 +23,40 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-
-//定义一个函数，target是生成jar包的文件名，classDir是class文件所在的文件夹  
-def makeJar(String target,String classDir){
-    exec{
-        executable "jar"   //调用jar          
-        args "cvf",target
+//定义一个函数，target是生成jar包的文件名，classDir是class文件所在的文件夹
+def makeJar(String target, String classDir) {
+    exec {
+        executable "jar"   //调用jar
+        args "cvf", target
         args "-C", classDir
-        args "","."
+        args "", "."
     }
 }
-//新建一个task,名为buildLib,依赖build(build是一个自带的task) 
-//生成jar的命令.......项目名/模块名>gradle buildLib
-task buildLib(dependsOn:['build'])<< {
-    makeJar("ToolLog-v1.7.jar","build/intermediates/classes/release")
+//新建一个task,名为buildLib,依赖build(build是一个自带的task)
+//生成jar的命令.......项目名/模块名====>gradle buildLib
+task buildLib(dependsOn: ['build']) << {
+    makeJar("ToolLog-v1.7.jar", "build/intermediates/classes/release")
 }
+
+//dependsOn 可根据实际需要增加或更改
+task buildJar(dependsOn: ['compileReleaseJavaWithJavac'], type: Jar) {
+    appendix = "library"
+    baseName = "ToolLog"
+    version = "1.7"
+    classifier = "release"//release  sources
+    //后缀名
+    extension = "jar"
+    //最终的 Jar 包名，如果没设置，默认为 [baseName]-[appendix]-[version]-[classifier].[extension]
+    archiveName = "ToolLog-v1.7.jar"
+    //需打包的资源所在的路径集
+    def srcClassDir = [project.buildDir.absolutePath + "/intermediates/classes/release"];
+    //初始化资源路径集
+    from srcClassDir
+    //去除路径集下部分的资源
+    exclude "**/R.class"
+    exclude "**/R\$*.class"
+    //只导入资源路径集下的部分资源
+    include "com/darren/loglibs/**/*.class"
+    //注: exclude include 支持可变长参数
+}
+

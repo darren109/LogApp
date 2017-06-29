@@ -89,9 +89,9 @@ public class EmailUtils {
             mailMessage.setFrom(new InternetAddress(SEND_ADDRESS));
             mailMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(TO_ADDRESS));
             if (TextUtils.isEmpty(title)) {
-                mailMessage.setSubject("上报错误日志信息", "utf-8");
+                mailMessage.setSubject("上报错误日志信息[ToolLog]", "utf-8");
             } else {
-                mailMessage.setSubject(title + "(上报错误日志信息)", "utf-8");
+                mailMessage.setSubject(title + "(上报错误日志信息[ToolLog])", "utf-8");
             }
             mailMessage.setSentDate(new Date());
             Multipart multipart = new MimeMultipart();
@@ -102,7 +102,7 @@ public class EmailUtils {
                 BodyPart attachmentBody = new MimeBodyPart();
                 DataSource source = new FileDataSource(ToolLog.getLocalLogFile());
                 attachmentBody.setDataHandler(new DataHandler(source));
-                attachmentBody.setFileName("log");
+                attachmentBody.setFileName("log.log");
                 multipart.addBodyPart(attachmentBody);
             } else {
                 //no attachment  no report
@@ -112,7 +112,7 @@ public class EmailUtils {
                 BodyPart attachmentBody = new MimeBodyPart();
                 DataSource source = new FileDataSource(ToolLog.getLocalLogBackupFile());
                 attachmentBody.setDataHandler(new DataHandler(source));
-                attachmentBody.setFileName("log_backup");
+                attachmentBody.setFileName("log_backup.log");
                 multipart.addBodyPart(attachmentBody);
             }
             mailMessage.setContent(multipart);
