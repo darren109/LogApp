@@ -189,14 +189,7 @@ public class ToolLog {
                 break;
         }
     }
-
-
-    /**
-     * @param tagStr
-     * @param targetDirectory
-     * @param fileName
-     * @param objectMsg
-     */
+    
     private static void printFile(String tagStr, File targetDirectory, String fileName, Object objectMsg) {
         if (!IS_SAVE_LOG) {
             return;
@@ -229,9 +222,6 @@ public class ToolLog {
 
     /**
      * 获取本地日志
-     *
-     * @return
-     * @hide
      */
     public static File getLocalLogFile() {
         return new File(Util.getProperCacheDir(context, FileLog.getFileLogPath()), File.separator + FileLog.getLocalFileName());
@@ -239,9 +229,6 @@ public class ToolLog {
 
     /**
      * 获取本地日志备份
-     *
-     * @return
-     * @hide
      */
     public static File getLocalLogBackupFile() {
         return new File(Util.getProperCacheDir(context, FileLog.getFileLogPath()), File.separator + FileLog.getLocalBackupFileName());
@@ -249,10 +236,6 @@ public class ToolLog {
 
     /**
      * 生成Log日志。前缀信息格式：日期时间+当前线程名+文件名+行号+方法名
-     *
-     * @param tagStr
-     * @param objects
-     * @return
      */
     private static String[] wrapperContent(String tagStr, Object... objects) {
 
