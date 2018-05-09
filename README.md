@@ -55,7 +55,7 @@ compile 'com.darren.library:loglib:1.7.0'
 
 ## Eclipse
 
-You need add [Toollog.jar](https://github.com/3642072/LogApp/loglibs/ToolLog-v1.7.0.jar) into your project.
+You need add [Toollog.jar](./loglibs/ToolLog-v1.7.0.jar) into your project.
 
 ## Notice
 
