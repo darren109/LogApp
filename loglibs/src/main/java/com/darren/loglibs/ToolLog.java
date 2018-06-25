@@ -24,7 +24,7 @@ public class ToolLog {
 
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     public static final String NULL_TIPS = "Log with null object";
-    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss aaa");
+    private static final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat("MM-dd/HH:mm:ss.SSS");
 
     private static final String DEFAULT_MESSAGE = "execute";
     private static final String PARAM = "Param";
@@ -270,8 +270,8 @@ public class ToolLog {
         }
 
         String msg = (objects == null) ? NULL_TIPS : getObjectsString(objects);
-        String headString = "[ " + SIMPLE_DATE_FORMAT.format(new Date()) + " " + Thread.currentThread().getName() + " ]" +
-                "[(" + className + ":" + lineNumber + ")#" + methodNameShort + " ] ";
+        String headString = "[" + SIMPLE_DATE_FORMAT.format(new Date()) + "-" + Thread.currentThread().getName() + "]" +
+                "[(" + className + ":" + lineNumber + ")#" + methodNameShort + "]";
 
         return new String[]{tag, msg, headString};
     }

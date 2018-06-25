@@ -39,23 +39,23 @@ Android LogCat 工具类，目前功能：
 ### ToolLog.j(Tag,String)
 ### ToolLog.f()
 ```java
- ToolLog.f(TAG, Environment.getExternalStorageDirectory(), "test.txt", JSON_LONG);
+ToolLog.f(TAG, Environment.getExternalStorageDirectory(), "test.txt", JSON_LONG);
 ```
 ### ToolLog.x()
 ```java
- ToolLog.x(XML);
+ToolLog.x(XML);
 ```
 ### ToolLog.log()
 
 ## Android Studio
 
 ```groovy
-compile 'com.darren.library:loglib:1.7.0'
+compile 'com.darren.library:loglib:1.7.1'
 ```
 
 ## Eclipse
 
-You need add [Toollog.jar](./loglibs/ToolLog-v1.7.0.jar) into your project.
+You need add [ToolLog.jar](./loglibs/ToolLog-v1.7.1.jar) into your project.
 
 ## Notice
 

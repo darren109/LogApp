@@ -40,7 +40,6 @@ dependencies {
     provided 'com.sun.mail:android-activation:1.5.5'
     debugCompile 'com.sun.mail:android-mail:1.5.5'
     debugCompile 'com.sun.mail:android-activation:1.5.5'
-    //    compile project(':loglibs')
-//    compile files('libs/ToolLog-v1.7.jar')
-    compile 'com.darren.library:loglib:1.7.0'
+//        compile project(':loglibs')
+    compile 'com.darren.library:loglib:1.7.1'
 }
