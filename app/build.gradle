@@ -15,10 +15,14 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("boolean", "IS_DEBUG", "false")
+            buildConfigField("boolean", "IS_SAVE_DEBUG", "true")
         }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("boolean", "IS_DEBUG", "true")
+            buildConfigField("boolean", "IS_SAVE_DEBUG", "true")
         }
     }
 //    sourceSets {
